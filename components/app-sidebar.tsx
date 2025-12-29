@@ -17,6 +17,8 @@ import {
   IconSearch,
   IconSettings,
   IconUsers,
+  IconUser,
+  IconListLetters,
 } from "@tabler/icons-react"
 
 import { NavDocuments } from "@/components/nav-documents"
@@ -32,11 +34,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-{/* --- Datos del Usuario --- */}
+import { isHmrRefresh } from "next/dist/server/app-render/work-unit-async-storage.external"
+{/* --- Datos del Usuario --- */ }
 
-{/*Ttrayendo al usuario actual en un props*/}
+{/*Ttrayendo al usuario actual en un props*/ }
 
-{/* --- Datos del Usuario --- */}
+{/* --- Datos del Usuario --- */ }
 
 const data = {
   user: {
@@ -47,13 +50,13 @@ const data = {
   navMain: [
     {
       title: "Personal a procesar",
-      url: "#",
-      icon: IconDashboard,
+      url: "./staff",
+      icon: IconUser,
     },
     {
       title: "Estados",
-      url: "#",
-      icon: IconChartBar,
+      url: "/status",
+      icon: IconListLetters,
     },
   ],
 
@@ -61,7 +64,7 @@ const data = {
     //Ultima implementacion
     {
       title: "Configuraciones",
-      url: "#",
+      url: "/staff",
       icon: IconSettings,
     },
     {
@@ -74,12 +77,12 @@ const data = {
   tools: [
     {
       name: "Clasificador de CVs",
-      url: "#",
+      url: "/clasificador-csv",
       icon: IconRobot,
     },
     {
       name: "Dashboard General",
-      url: "#",
+      url: "/dashboard",
       icon: IconDashboard,
     },
   ],
@@ -93,10 +96,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
+              className="data-[slot=sidebar-menu-button]:p-1.5!"
             >
-              <a href="#">
-                <img src="/logo.jpg" className="!size-5" />
+              <a href="/dashboard">
+                <img src="/logo.jpg" className="size-5!" />
                 <span className="text-base font-semibold">Selección & Contratación</span>
               </a>
             </SidebarMenuButton>
