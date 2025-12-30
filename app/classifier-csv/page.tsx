@@ -1,4 +1,4 @@
-const personalPage: React.FC = () => {
+const classifierCSV: React.FC = () => {
     return (
         <div>
             <p>clasificador</p>
@@ -6,4 +6,4 @@ const personalPage: React.FC = () => {
     )
 }
 
-export default personalPage;
+export default classifierCSV;

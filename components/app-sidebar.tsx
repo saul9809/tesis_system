@@ -77,7 +77,7 @@ const data = {
   tools: [
     {
       name: "Clasificador de CVs",
-      url: "/clasificador-csv",
+      url: "/classifier-csv",
       icon: IconRobot,
     },
     {
