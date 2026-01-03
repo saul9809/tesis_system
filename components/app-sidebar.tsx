@@ -1,24 +1,10 @@
 "use client";
-
 import * as React from "react";
 import {
-  IconCamera,
-  IconChartBar,
   IconDashboard,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconRobot,
-  IconFolder,
   IconHelp,
-  IconInnerShadowTop,
-  IconListDetails,
-  IconReport,
-  IconSearch,
   IconSettings,
-  IconUsers,
   IconUser,
-  IconListLetters,
 } from "@tabler/icons-react";
 
 import { NavDocuments } from "@/components/nav-documents";
@@ -34,7 +20,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { isHmrRefresh } from "next/dist/server/app-render/work-unit-async-storage.external";
 {
   /* --- Datos del Usuario --- */
 }
@@ -51,7 +36,7 @@ const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    avatar: "",
   },
   navMain: [
     {
@@ -59,15 +44,16 @@ const data = {
       url: "./staff",
       icon: IconUser,
     },
-    {
+    /* {
       title: "Estados",
       url: "/status",
       icon: IconListLetters,
-    },
+    },*/
   ],
 
   navSecondary: [
     //Ultima implementacion
+
     {
       title: "Configuraciones",
       url: "/staff",
@@ -81,11 +67,11 @@ const data = {
     },
   ],
   tools: [
-    {
+    /* {
       name: "Clasificador de CVs",
       url: "/classifier-csv",
       icon: IconRobot,
-    },
+    },*/
     {
       name: "Dashboard General",
       url: "/dashboard",
