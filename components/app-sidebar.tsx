@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   IconCamera,
   IconChartBar,
@@ -19,12 +19,12 @@ import {
   IconUsers,
   IconUser,
   IconListLetters,
-} from "@tabler/icons-react"
+} from "@tabler/icons-react";
 
-import { NavDocuments } from "@/components/nav-documents"
-import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
-import { NavUser } from "@/components/nav-user"
+import { NavDocuments } from "@/components/nav-documents";
+import { NavMain } from "@/components/nav-main";
+import { NavSecondary } from "@/components/nav-secondary";
+import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -33,13 +33,19 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { isHmrRefresh } from "next/dist/server/app-render/work-unit-async-storage.external"
-{/* --- Datos del Usuario --- */ }
+} from "@/components/ui/sidebar";
+import { isHmrRefresh } from "next/dist/server/app-render/work-unit-async-storage.external";
+{
+  /* --- Datos del Usuario --- */
+}
 
-{/*Ttrayendo al usuario actual en un props*/ }
+{
+  /*Ttrayendo al usuario actual en un props*/
+}
 
-{/* --- Datos del Usuario --- */ }
+{
+  /* --- Datos del Usuario --- */
+}
 
 const data = {
   user: {
@@ -68,7 +74,7 @@ const data = {
       icon: IconSettings,
     },
     {
-      //Pasar correo a soporte con problematica 
+      //Pasar correo a soporte con problematica
       title: "Necesita ayuda?",
       url: "#",
       icon: IconHelp,
@@ -86,7 +92,7 @@ const data = {
       icon: IconDashboard,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -100,7 +106,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
               <a href="/dashboard">
                 <img src="/logo.jpg" className="size-5!" />
-                <span className="text-base font-semibold">Selección & Contratación</span>
+                <span className="text-base font-semibold">
+                  Selección & Contratación
+                </span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -115,5 +123,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }
