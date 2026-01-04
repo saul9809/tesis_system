@@ -52,7 +52,7 @@ import {
   type SortingState,
   type VisibilityState,
 } from "@tanstack/react-table";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid, Cell, XAxis } from "recharts";
 import { z } from "zod";
 
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -94,16 +94,7 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 //Importando el dialogo
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+
 import {
   Table,
   TableBody,
@@ -114,6 +105,7 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CircleDashed, Search } from "lucide-react";
+import NewPersonal from "@/app/staff/add-personal-form";
 
 export const schema = z.object({
   id: z.number(),
@@ -535,59 +527,7 @@ export function DataTable({
             </DropdownMenuContent>
           </DropdownMenu>
           {/*Adicionar Nuevo Personal - Pendiente a realizar un modal con un form para adicionar un nuevo personal*/}
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="ghost" size="sm">
-                <IconPlus className="mr-2" />
-                <span className="hidden lg:inline">Nuevo Personal</span>
-              </Button>
-            </DialogTrigger>
-
-            <DialogContent className="sm:max-w-[425px]">
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  // lógica de submit
-                }}
-              >
-                <DialogHeader>
-                  <DialogTitle>Nuevo Personal</DialogTitle>
-                  <DialogDescription>
-                    Make changes to your profile here. Click save when you're
-                    done.
-                  </DialogDescription>
-                </DialogHeader>
-
-                <div className="grid gap-4">
-                  <div className="grid gap-3">
-                    <Label htmlFor="name-1">Name</Label>
-                    <Input
-                      id="name-1"
-                      name="name"
-                      defaultValue="Pedro Duarte"
-                    />
-                  </div>
-                  <div className="grid gap-3">
-                    <Label htmlFor="username-1">Username</Label>
-                    <Input
-                      id="username-1"
-                      name="username"
-                      defaultValue="@peduarte"
-                    />
-                  </div>
-                </div>
-
-                <DialogFooter className="mt-4">
-                  <DialogClose asChild>
-                    <Button type="button" variant="outline">
-                      Cancel
-                    </Button>
-                  </DialogClose>
-                  <Button type="submit">Save changes</Button>
-                </DialogFooter>
-              </form>
-            </DialogContent>
-          </Dialog>
+          <NewPersonal />
         </div>
       </div>
       <TabsContent
