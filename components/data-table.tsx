@@ -22,7 +22,6 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import {
   IconActivity,
-  IconAi,
   IconChevronDown,
   IconChevronLeft,
   IconChevronRight,
@@ -33,12 +32,8 @@ import {
   IconDotsVertical,
   IconGripVertical,
   IconLayoutColumns,
-  IconListDetails,
-  IconListLetters,
-  IconLoader,
   IconPlus,
   IconRobot,
-  IconSearch,
   IconTrash,
   IconTrendingUp,
 } from "@tabler/icons-react";
@@ -58,7 +53,6 @@ import {
   type VisibilityState,
 } from "@tanstack/react-table";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-import { toast } from "sonner";
 import { z } from "zod";
 
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -99,6 +93,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+//Importando el dialogo
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   Table,
   TableBody,
@@ -108,16 +113,16 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search } from "lucide-react";
+import { CircleDashed, Search } from "lucide-react";
 
 export const schema = z.object({
   id: z.number(),
   personal_name: z.string(),
-  especialidad: z.string(),
-  dirección: z.string(),
-  entrevistado: z.string(),
-  aprovado: z.string(),
-  pendiente: z.string(),
+  specialty: z.string(),
+  address: z.string(),
+  interviewee: z.boolean(),
+  approved: z.boolean(),
+  pending: z.boolean(),
 });
 
 //Funcion de Buscar
@@ -195,13 +200,20 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     header: "Especialidad",
     cell: ({ row }) => (
       <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.especialidad}
-        </Badge>
+        <Label>{row.original.specialty}</Label>
       </div>
     ),
   },
   {
+    accessorKey: "dirección",
+    header: "Dirección",
+    cell: ({ row }) => (
+      <div className="w-32">
+        <Label>{row.original.address}</Label>
+      </div>
+    ),
+  },
+  /*{
     accessorKey: "address",
     header: "Dirección",
     cell: ({ row }) => (
@@ -214,56 +226,65 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
         {row.original.address}
       </Badge>
     ),
-  },
+  },*/
   {
-    accessorKey: "address",
-    header: "Dirección",
+    accessorKey: "entrevistado",
+    header: () => <div className="w-full text-start">Entrevistado</div>,
     cell: ({ row }) => (
       <Badge variant="outline" className="text-muted-foreground px-1.5">
-        {row.original.address === "Done" ? (
+        {row.original.interviewee === true ? (
           <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
         ) : (
-          <IconLoader />
+          <CircleDashed />
         )}
-        {row.original.address}
+        {row.original.interviewee}
       </Badge>
     ),
   },
   {
-    accessorKey: "limit",
-    header: () => <div className="w-full text-right">Limit</div>,
+    accessorKey: "aprobado",
+    header: () => <div className="w-full text-start">Aprobado</div>,
     cell: ({ row }) => (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-            loading: `Saving ${row.original.personal_name}`,
-            success: "Done",
-            error: "Error",
-          });
-        }}
-      >
-        <Label htmlFor={`${row.original.id}-limit`} className="sr-only">
-          Limit
-        </Label>
-        <Input
-          className="hover:bg-input/30 focus-visible:bg-background dark:hover:bg-input/30 dark:focus-visible:bg-input/30 h-8 w-16 border-transparent bg-transparent text-right shadow-none focus-visible:border dark:bg-transparent"
-          defaultValue={row.original.limit}
-          id={`${row.original.id}-limit`}
-        />
-      </form>
+      <Badge variant="outline" className="text-muted-foreground px-1.5">
+        {row.original.approved === true ? (
+          <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
+        ) : (
+          <CircleDashed />
+        )}
+        {row.original.approved}
+      </Badge>
     ),
   },
   {
-    accessorKey: "reviewer",
-    header: "Reviewer",
-    cell: ({ row }) => {
-      const isAssigned = row.original.reviewer !== "Assign reviewer";
+    accessorKey: "pendiente",
+    header: () => <div className="w-full text-start">Pendiente</div>,
+    cell: ({ row }) => (
+      <Badge variant="outline" className="text-muted-foreground px-1.5">
+        {row.original.pending === true ? (
+          <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400 " />
+        ) : (
+          <CircleDashed />
+        )}
+        {row.original.pending}
+      </Badge>
+    ),
+  },
+  //Codigo con logica a estudiar para modificaciones futuras
+  /* {
+    accessorKey: "interviewee",
+    header: () => <div className="w-full text-right">Entrevistado</div>,
+    cell: ({ row }) => (
+      <Badge variant="outline" className="text-muted-foreground px-1.5">
+        {row.original.interviewee === true ? (
+          <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
+        ) : (
+          <CircleDashed />
+        )}
+        {row.original.interviewee}
+      </Badge>
+    ),
 
-      if (isAssigned) {
-        return row.original.reviewer;
-      }
-
+    
       return (
         <>
           <Label htmlFor={`${row.original.id}-reviewer`} className="sr-only">
@@ -285,9 +306,8 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
             </SelectContent>
           </Select>
         </>
-      );
-    },
-  },
+      );*/
+
   {
     //Dropdown para acciones adicionales 3 puntos
     id: "actions",
@@ -307,7 +327,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
           {/*Editar personal*/}
           <DropdownMenuItem>Editar</DropdownMenuItem>
           {/*Pendiente logica Exportar a un archivo CSV o Excel*/}
-          <DropdownMenuItem>Exportar a CSV</DropdownMenuItem>
+          <DropdownMenuItem>Exportar a Excel</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem variant="destructive">Eliminar</DropdownMenuItem>
         </DropdownMenuContent>
@@ -499,28 +519,75 @@ export function DataTable({
               <DropdownMenuItem variant="default">
                 {/*Aqui va la Logica para exportar a excel */}
                 <IconCsv />
-                <span className="hidden lg:inline">Exportar Excel</span>
+                <span>Exportar a Excel</span>
               </DropdownMenuItem>
               <DropdownMenuItem variant="default">
                 {/*Aqui va la Logica para exportar a excel */}
                 <IconRobot />
-                <span className="hidden lg:inline">
-                  Clasificar de Currículos
-                </span>
+                <span>Clasificar de Currículos</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem variant="destructive">
                 {/*Aqui va la Logica de borrar personal */}
                 <IconTrash />
-                <span className="hidden lg:inline">Eliminar Personal</span>
+                <span>Eliminar Personal</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           {/*Adicionar Nuevo Personal - Pendiente a realizar un modal con un form para adicionar un nuevo personal*/}
-          <Button variant="ghost" size="sm">
-            <IconPlus />
-            <span className="hidden lg:inline">Nuevo Personal</span>
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <IconPlus className="mr-2" />
+                <span className="hidden lg:inline">Nuevo Personal</span>
+              </Button>
+            </DialogTrigger>
+
+            <DialogContent className="sm:max-w-[425px]">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  // lógica de submit
+                }}
+              >
+                <DialogHeader>
+                  <DialogTitle>Nuevo Personal</DialogTitle>
+                  <DialogDescription>
+                    Make changes to your profile here. Click save when you're
+                    done.
+                  </DialogDescription>
+                </DialogHeader>
+
+                <div className="grid gap-4">
+                  <div className="grid gap-3">
+                    <Label htmlFor="name-1">Name</Label>
+                    <Input
+                      id="name-1"
+                      name="name"
+                      defaultValue="Pedro Duarte"
+                    />
+                  </div>
+                  <div className="grid gap-3">
+                    <Label htmlFor="username-1">Username</Label>
+                    <Input
+                      id="username-1"
+                      name="username"
+                      defaultValue="@peduarte"
+                    />
+                  </div>
+                </div>
+
+                <DialogFooter className="mt-4">
+                  <DialogClose asChild>
+                    <Button type="button" variant="outline">
+                      Cancel
+                    </Button>
+                  </DialogClose>
+                  <Button type="submit">Save changes</Button>
+                </DialogFooter>
+              </form>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
       <TabsContent
@@ -779,7 +846,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
                 <Label htmlFor="type">Type</Label>
-                <Select defaultValue={item.type}>
+                <Select defaultValue={item.specialty}>
                   <SelectTrigger id="type" className="w-full">
                     <SelectValue placeholder="Select a type" />
                   </SelectTrigger>
@@ -805,7 +872,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
               </div>
               <div className="flex flex-col gap-3">
                 <Label htmlFor="especialidad">Especialidad</Label>
-                <Select defaultValue={item.especialidad}>
+                <Select defaultValue={item.specialty}>
                   <SelectTrigger id="especialidad" className="w-full">
                     <SelectValue placeholder="Select a specialty" />
                   </SelectTrigger>
@@ -820,16 +887,16 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
                 <Label htmlFor="target">Target</Label>
-                <Input id="target" defaultValue={item.target} />
+                <Input id="target" defaultValue={item.specialty} />
               </div>
               <div className="flex flex-col gap-3">
                 <Label htmlFor="limit">Limit</Label>
-                <Input id="limit" defaultValue={item.limit} />
+                <Input id="limit" defaultValue={item.specialty} />
               </div>
             </div>
             <div className="flex flex-col gap-3">
               <Label htmlFor="reviewer">Reviewer</Label>
-              <Select defaultValue={item.reviewer}>
+              <Select defaultValue={item.specialty}>
                 <SelectTrigger id="reviewer" className="w-full">
                   <SelectValue placeholder="Select a reviewer" />
                 </SelectTrigger>
