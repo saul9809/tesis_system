@@ -2,7 +2,7 @@
   {
     "id": 1,
     "personal_name": "Cover page",
-    "type": "Cover page",
+    "especialidad": "Cover page",
     "status": "In Process",
     "target": "18",
     "limit": "5",
@@ -11,7 +11,7 @@
   {
     "id": 2,
     "personal_name": "Table of contents",
-    "type": "Table of contents",
+    "especialidad": "Table of contents",
     "status": "Done",
     "target": "29",
     "limit": "24",
@@ -20,7 +20,7 @@
   {
     "id": 3,
     "personal_name": "Executive summary",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "10",
     "limit": "13",
@@ -29,7 +29,7 @@
   {
     "id": 4,
     "personal_name": "Saul Fuentes",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "27",
     "limit": "23",
@@ -38,7 +38,7 @@
   {
     "id": 5,
     "personal_name": "Design",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "In Process",
     "target": "2",
     "limit": "16",
@@ -47,7 +47,7 @@
   {
     "id": 6,
     "personal_name": "Capabilities",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "In Process",
     "target": "20",
     "limit": "8",
@@ -56,7 +56,7 @@
   {
     "id": 7,
     "personal_name": "Integration with existing systems",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "In Process",
     "target": "19",
     "limit": "21",
@@ -65,7 +65,7 @@
   {
     "id": 8,
     "personal_name": "Innovation and Advantages",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "25",
     "limit": "26",
@@ -74,7 +74,7 @@
   {
     "id": 9,
     "personal_name": "Overview of EMR's Innovative Solutions",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "Done",
     "target": "7",
     "limit": "23",
@@ -83,7 +83,7 @@
   {
     "id": 10,
     "personal_name": "Advanced Algorithms and Machine Learning",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "30",
     "limit": "28",
@@ -92,7 +92,7 @@
   {
     "id": 11,
     "personal_name": "Adaptive Communication Protocols",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "9",
     "limit": "31",
@@ -101,7 +101,7 @@
   {
     "id": 12,
     "personal_name": "Advantages Over Current Technologies",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "12",
     "limit": "0",
@@ -110,7 +110,7 @@
   {
     "id": 13,
     "personal_name": "Past Performance",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "22",
     "limit": "33",
@@ -119,7 +119,7 @@
   {
     "id": 14,
     "personal_name": "Customer Feedback and Satisfaction Levels",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "15",
     "limit": "34",
@@ -128,7 +128,7 @@
   {
     "id": 15,
     "personal_name": "Implementation Challenges and Solutions",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "3",
     "limit": "35",
@@ -137,7 +137,7 @@
   {
     "id": 16,
     "personal_name": "Security Measures and Data Protection Policies",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "In Process",
     "target": "6",
     "limit": "36",
@@ -146,7 +146,7 @@
   {
     "id": 17,
     "personal_name": "Scalability and Future Proofing",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "4",
     "limit": "37",
@@ -155,7 +155,7 @@
   {
     "id": 18,
     "personal_name": "Cost-Benefit Analysis",
-    "type": "Plain language",
+    "especialidad": "Plain language",
     "status": "Done",
     "target": "14",
     "limit": "38",
@@ -164,7 +164,7 @@
   {
     "id": 19,
     "personal_name": "User Training and Onboarding Experience",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "17",
     "limit": "39",
@@ -173,7 +173,7 @@
   {
     "id": 20,
     "personal_name": "Future Development Roadmap",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "11",
     "limit": "40",
@@ -182,7 +182,7 @@
   {
     "id": 21,
     "personal_name": "System Architecture Overview",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "In Process",
     "target": "24",
     "limit": "18",
@@ -191,7 +191,7 @@
   {
     "id": 22,
     "personal_name": "Risk Management Plan",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "15",
     "limit": "22",
@@ -200,7 +200,7 @@
   {
     "id": 23,
     "personal_name": "Compliance Documentation",
-    "type": "Legal",
+    "especialidad": "Legal",
     "status": "In Process",
     "target": "31",
     "limit": "27",
@@ -209,7 +209,7 @@
   {
     "id": 24,
     "personal_name": "API Documentation",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "Done",
     "target": "8",
     "limit": "12",
@@ -218,7 +218,7 @@
   {
     "id": 25,
     "personal_name": "User Interface Mockups",
-    "type": "Visual",
+    "especialidad": "Visual",
     "status": "In Process",
     "target": "19",
     "limit": "25",
@@ -227,7 +227,7 @@
   {
     "id": 26,
     "personal_name": "Database Schema",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "Done",
     "target": "22",
     "limit": "20",
@@ -236,7 +236,7 @@
   {
     "id": 27,
     "personal_name": "Testing Methodology",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "In Process",
     "target": "17",
     "limit": "14",
@@ -245,7 +245,7 @@
   {
     "id": 28,
     "personal_name": "Deployment Strategy",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "26",
     "limit": "30",
@@ -254,7 +254,7 @@
   {
     "id": 29,
     "personal_name": "Budget Breakdown",
-    "type": "Financial",
+    "especialidad": "Financial",
     "status": "In Process",
     "target": "13",
     "limit": "16",
@@ -263,7 +263,7 @@
   {
     "id": 30,
     "personal_name": "Market Analysis",
-    "type": "Research",
+    "especialidad": "Research",
     "status": "Done",
     "target": "29",
     "limit": "32",
@@ -272,7 +272,7 @@
   {
     "id": 31,
     "personal_name": "Competitor Comparison",
-    "type": "Research",
+    "especialidad": "Research",
     "status": "In Process",
     "target": "21",
     "limit": "19",
@@ -281,7 +281,7 @@
   {
     "id": 32,
     "personal_name": "Maintenance Plan",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "Done",
     "target": "16",
     "limit": "23",
@@ -290,7 +290,7 @@
   {
     "id": 33,
     "personal_name": "User Personas",
-    "type": "Research",
+    "especialidad": "Research",
     "status": "In Process",
     "target": "27",
     "limit": "24",
@@ -299,7 +299,7 @@
   {
     "id": 34,
     "personal_name": "Accessibility Compliance",
-    "type": "Legal",
+    "especialidad": "Legal",
     "status": "Done",
     "target": "18",
     "limit": "21",
@@ -308,7 +308,7 @@
   {
     "id": 35,
     "personal_name": "Performance Metrics",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "In Process",
     "target": "23",
     "limit": "26",
@@ -317,7 +317,7 @@
   {
     "id": 36,
     "personal_name": "Disaster Recovery Plan",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "Done",
     "target": "14",
     "limit": "17",
@@ -326,7 +326,7 @@
   {
     "id": 37,
     "personal_name": "Third-party Integrations",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "In Process",
     "target": "25",
     "limit": "28",
@@ -335,7 +335,7 @@
   {
     "id": 38,
     "personal_name": "User Feedback Summary",
-    "type": "Research",
+    "especialidad": "Research",
     "status": "Done",
     "target": "20",
     "limit": "15",
@@ -344,7 +344,7 @@
   {
     "id": 39,
     "personal_name": "Localization Strategy",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "In Process",
     "target": "12",
     "limit": "19",
@@ -353,7 +353,7 @@
   {
     "id": 40,
     "personal_name": "Mobile Compatibility",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "Done",
     "target": "28",
     "limit": "31",
@@ -362,7 +362,7 @@
   {
     "id": 41,
     "personal_name": "Data Migration Plan",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "In Process",
     "target": "19",
     "limit": "22",
@@ -371,7 +371,7 @@
   {
     "id": 42,
     "personal_name": "Quality Assurance Protocols",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "Done",
     "target": "30",
     "limit": "33",
@@ -380,7 +380,7 @@
   {
     "id": 43,
     "personal_name": "Stakeholder Analysis",
-    "type": "Research",
+    "especialidad": "Research",
     "status": "In Process",
     "target": "11",
     "limit": "14",
@@ -389,7 +389,7 @@
   {
     "id": 44,
     "personal_name": "Environmental Impact Assessment",
-    "type": "Research",
+    "especialidad": "Research",
     "status": "Done",
     "target": "24",
     "limit": "27",
@@ -398,7 +398,7 @@
   {
     "id": 45,
     "personal_name": "Intellectual Property Rights",
-    "type": "Legal",
+    "especialidad": "Legal",
     "status": "In Process",
     "target": "17",
     "limit": "20",
@@ -407,7 +407,7 @@
   {
     "id": 46,
     "personal_name": "Customer Support Framework",
-    "type": "Narrative",
+    "especialidad": "Narrative",
     "status": "Done",
     "target": "22",
     "limit": "25",
@@ -416,7 +416,7 @@
   {
     "id": 47,
     "personal_name": "Version Control Strategy",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "In Process",
     "target": "15",
     "limit": "18",
@@ -425,7 +425,7 @@
   {
     "id": 48,
     "personal_name": "Continuous Integration Pipeline",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "Done",
     "target": "26",
     "limit": "29",
@@ -434,7 +434,7 @@
   {
     "id": 49,
     "personal_name": "Regulatory Compliance",
-    "type": "Legal",
+    "especialidad": "Legal",
     "status": "In Process",
     "target": "13",
     "limit": "16",
@@ -443,7 +443,7 @@
   {
     "id": 50,
     "personal_name": "User Authentication System",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "Done",
     "target": "28",
     "limit": "31",
@@ -452,7 +452,7 @@
   {
     "id": 51,
     "personal_name": "Data Analytics Framework",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "In Process",
     "target": "21",
     "limit": "24",
@@ -461,7 +461,7 @@
   {
     "id": 52,
     "personal_name": "Cloud Infrastructure",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "Done",
     "target": "16",
     "limit": "19",
@@ -470,7 +470,7 @@
   {
     "id": 53,
     "personal_name": "Network Security Measures",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "In Process",
     "target": "29",
     "limit": "32",
@@ -479,7 +479,7 @@
   {
     "id": 54,
     "personal_name": "Project Timeline",
-    "type": "Planning",
+    "especialidad": "Planning",
     "status": "Done",
     "target": "14",
     "limit": "17",
@@ -488,7 +488,7 @@
   {
     "id": 55,
     "personal_name": "Resource Allocation",
-    "type": "Planning",
+    "especialidad": "Planning",
     "status": "In Process",
     "target": "27",
     "limit": "30",
@@ -497,7 +497,7 @@
   {
     "id": 56,
     "personal_name": "Team Structure and Roles",
-    "type": "Planning",
+    "especialidad": "Planning",
     "status": "Done",
     "target": "20",
     "limit": "23",
@@ -506,7 +506,7 @@
   {
     "id": 57,
     "personal_name": "Communication Protocols",
-    "type": "Planning",
+    "especialidad": "Planning",
     "status": "In Process",
     "target": "15",
     "limit": "18",
@@ -515,7 +515,7 @@
   {
     "id": 58,
     "personal_name": "Success Metrics",
-    "type": "Planning",
+    "especialidad": "Planning",
     "status": "Done",
     "target": "30",
     "limit": "33",
@@ -524,7 +524,7 @@
   {
     "id": 59,
     "personal_name": "Internationalization Support",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "In Process",
     "target": "23",
     "limit": "26",
@@ -533,7 +533,7 @@
   {
     "id": 60,
     "personal_name": "Backup and Recovery Procedures",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "Done",
     "target": "18",
     "limit": "21",
@@ -542,7 +542,7 @@
   {
     "id": 61,
     "personal_name": "Monitoring and Alerting System",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "In Process",
     "target": "25",
     "limit": "28",
@@ -551,7 +551,7 @@
   {
     "id": 62,
     "personal_name": "Code Review Guidelines",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "Done",
     "target": "12",
     "limit": "15",
@@ -560,7 +560,7 @@
   {
     "id": 63,
     "personal_name": "Documentation Standards",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "In Process",
     "target": "27",
     "limit": "30",
@@ -569,7 +569,7 @@
   {
     "id": 64,
     "personal_name": "Release Management Process",
-    "type": "Planning",
+    "especialidad": "Planning",
     "status": "Done",
     "target": "22",
     "limit": "25",
@@ -578,7 +578,7 @@
   {
     "id": 65,
     "personal_name": "Feature Prioritization Matrix",
-    "type": "Planning",
+    "especialidad": "Planning",
     "status": "In Process",
     "target": "19",
     "limit": "22",
@@ -587,7 +587,7 @@
   {
     "id": 66,
     "personal_name": "Technical Debt Assessment",
-    "type": "Technical content",
+    "especialidad": "Technical content",
     "status": "Done",
     "target": "24",
     "limit": "27",
@@ -596,7 +596,7 @@
   {
     "id": 67,
     "personal_name": "Capacity Planning",
-    "type": "Planning",
+    "especialidad": "Planning",
     "status": "In Process",
     "target": "21",
     "limit": "24",
@@ -605,7 +605,7 @@
   {
     "id": 68,
     "personal_name": "Service Level Agreements",
-    "type": "Legal",
+    "especialidad": "Legal",
     "status": "Done",
     "target": "26",
     "limit": "29",

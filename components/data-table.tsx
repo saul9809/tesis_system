@@ -21,17 +21,25 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
+  IconActivity,
+  IconAi,
   IconChevronDown,
   IconChevronLeft,
   IconChevronRight,
   IconChevronsLeft,
   IconChevronsRight,
   IconCircleCheckFilled,
+  IconCsv,
   IconDotsVertical,
   IconGripVertical,
   IconLayoutColumns,
+  IconListDetails,
+  IconListLetters,
   IconLoader,
   IconPlus,
+  IconRobot,
+  IconSearch,
+  IconTrash,
   IconTrendingUp,
 } from "@tabler/icons-react";
 import {
@@ -100,18 +108,29 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Search } from "lucide-react";
 
 export const schema = z.object({
   id: z.number(),
   personal_name: z.string(),
-  type: z.string(),
-  status: z.string(),
-  target: z.string(),
-  limit: z.string(),
-  reviewer: z.string(),
+  especialidad: z.string(),
+  dirección: z.string(),
+  entrevistado: z.string(),
+  aprovado: z.string(),
+  pendiente: z.string(),
 });
 
-// Create a separate component for the drag handle
+//Funcion de Buscar
+function SearchInput() {
+  //Pendiete a logica de buscar
+  return (
+    <div className="relative w-full max-w-sm">
+      <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+      <Input type="search" placeholder="Buscar Personal..." className="pl-9" />
+    </div>
+  );
+}
+////Mover manualmente las filas sosteniendo el drag handle
 function DragHandle({ id }: { id: number }) {
   const { attributes, listeners } = useSortable({
     id,
@@ -130,7 +149,7 @@ function DragHandle({ id }: { id: number }) {
     </Button>
   );
 }
-//Mover manualmente las filas sosteniendo el drag handle
+//Mover manualmente las filas sosteniendo el drag handle - Columnas de la tabla
 const columns: ColumnDef<z.infer<typeof schema>>[] = [
   {
     id: "drag",
@@ -172,53 +191,42 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "type",
-    header: "Section Type",
+    accessorKey: "especialidad",
+    header: "Especialidad",
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.type}
+          {row.original.especialidad}
         </Badge>
       </div>
     ),
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "address",
+    header: "Dirección",
     cell: ({ row }) => (
       <Badge variant="outline" className="text-muted-foreground px-1.5">
-        {row.original.status === "Done" ? (
+        {row.original.address === "Done" ? (
           <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
         ) : (
           <IconLoader />
         )}
-        {row.original.status}
+        {row.original.address}
       </Badge>
     ),
   },
   {
-    accessorKey: "target",
-    header: () => <div className="w-full text-right">Target</div>,
+    accessorKey: "address",
+    header: "Dirección",
     cell: ({ row }) => (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-            loading: `Saving ${row.original.personal_name}`,
-            success: "Done",
-            error: "Error",
-          });
-        }}
-      >
-        <Label htmlFor={`${row.original.id}-target`} className="sr-only">
-          Target
-        </Label>
-        <Input
-          className="hover:bg-input/30 focus-visible:bg-background dark:hover:bg-input/30 dark:focus-visible:bg-input/30 h-8 w-16 border-transparent bg-transparent text-right shadow-none focus-visible:border dark:bg-transparent"
-          defaultValue={row.original.target}
-          id={`${row.original.id}-target`}
-        />
-      </form>
+      <Badge variant="outline" className="text-muted-foreground px-1.5">
+        {row.original.address === "Done" ? (
+          <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
+        ) : (
+          <IconLoader />
+        )}
+        {row.original.address}
+      </Badge>
     ),
   },
   {
@@ -281,6 +289,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     },
   },
   {
+    //Dropdown para acciones adicionales 3 puntos
     id: "actions",
     cell: () => (
       <DropdownMenu>
@@ -291,21 +300,22 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
             size="icon"
           >
             <IconDotsVertical />
-            <span className="sr-only">Open menu</span>
+            <span className="sr-only">Menu</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem>Make a copy</DropdownMenuItem>
-          <DropdownMenuItem>Favorite</DropdownMenuItem>
+          {/*Editar personal*/}
+          <DropdownMenuItem>Editar</DropdownMenuItem>
+          {/*Pendiente logica Exportar a un archivo CSV o Excel*/}
+          <DropdownMenuItem>Exportar a CSV</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+          <DropdownMenuItem variant="destructive">Eliminar</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     ),
   },
 ];
-
+//Funcion para hacer las filas dragables
 function DraggableRow({ row }: { row: Row<z.infer<typeof schema>> }) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({
     id: row.original.id,
@@ -330,7 +340,7 @@ function DraggableRow({ row }: { row: Row<z.infer<typeof schema>> }) {
     </TableRow>
   );
 }
-//Logica de la tabla
+//Logica de la tabla - Tabla de datos
 export function DataTable({
   data: initialData,
 }: {
@@ -405,6 +415,9 @@ export function DataTable({
         <Label htmlFor="view-selector" className="sr-only">
           View
         </Label>
+        <div className="flex items-left gap-2">
+          <SearchInput />
+        </div>
         <Select defaultValue="outline">
           <SelectTrigger
             className="flex w-fit @4xl/main:hidden"
@@ -414,7 +427,7 @@ export function DataTable({
             <SelectValue placeholder="Seleccione un estado" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="outline">Estados</SelectItem>
+            <SelectItem value="outline">General</SelectItem>
             <SelectItem value="past-performance">Entrevistado</SelectItem>
             <SelectItem value="key-personnel">Aprobado</SelectItem>
             <SelectItem value="focus-documents">Pendiete a Analizar</SelectItem>
@@ -422,17 +435,21 @@ export function DataTable({
         </Select>
         {/*Dropdown para estados*/}
         <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
-          <TabsTrigger value="outline">Estados</TabsTrigger>
+          <TabsTrigger value="outline">General</TabsTrigger>
           <TabsTrigger value="past-performance">
-            Entrevistado <Badge variant="secondary">3</Badge>
+            Entrevistado <Badge variant="secondary">p</Badge>
+            {/*Pendiente a logica de conteo*/}
           </TabsTrigger>
           <TabsTrigger value="key-personnel">
-            Aprobado <Badge variant="secondary">2</Badge>
+            Aprobado <Badge variant="secondary">p</Badge>
+            {/*Pendiente a logica de conteo*/}
           </TabsTrigger>
           <TabsTrigger value="focus-documents">
-            Pendiente a Analizar
+            Pendiente a Analizar <Badge variant="secondary">p</Badge>
+            {/*Pendiente a logica de conteo*/}
           </TabsTrigger>
         </TabsList>
+
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -441,7 +458,7 @@ export function DataTable({
                 <span className="hidden lg:inline">
                   Editar Columnas de Tabla
                 </span>
-                <span className="lg:hidden">Columns</span>
+                <span className="lg:hidden">Editar Columnas</span>
                 <IconChevronDown />
               </Button>
             </DropdownMenuTrigger>
@@ -469,10 +486,40 @@ export function DataTable({
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          {/*Adicionar Nuevo Personal /////////////////////////////////////////////////////*/}
-          <Button variant="outline" size="sm">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm">
+                <IconActivity />
+                <span className="hidden lg:inline">Acciones</span>
+                <span className="lg:hidden">Acciones</span>
+                <IconChevronDown />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem variant="default">
+                {/*Aqui va la Logica para exportar a excel */}
+                <IconCsv />
+                <span className="hidden lg:inline">Exportar Excel</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem variant="default">
+                {/*Aqui va la Logica para exportar a excel */}
+                <IconRobot />
+                <span className="hidden lg:inline">
+                  Clasificar de Currículos
+                </span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem variant="destructive">
+                {/*Aqui va la Logica de borrar personal */}
+                <IconTrash />
+                <span className="hidden lg:inline">Eliminar Personal</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          {/*Adicionar Nuevo Personal - Pendiente a realizar un modal con un form para adicionar un nuevo personal*/}
+          <Button variant="ghost" size="sm">
             <IconPlus />
-            <span className="hidden lg:inline">Add Section</span>
+            <span className="hidden lg:inline">Nuevo Personal</span>
           </Button>
         </div>
       </div>
@@ -539,7 +586,7 @@ export function DataTable({
           <div className="flex w-full items-center gap-8 lg:w-fit">
             <div className="hidden items-center gap-2 lg:flex">
               <Label htmlFor="rows-per-page" className="text-sm font-medium">
-                Rows per page
+                Filas por página
               </Label>
               <Select
                 value={`${table.getState().pagination.pageSize}`}
@@ -572,7 +619,7 @@ export function DataTable({
                 onClick={() => table.setPageIndex(0)}
                 disabled={!table.getCanPreviousPage()}
               >
-                <span className="sr-only">Go to first page</span>
+                <span className="sr-only">Ir a la primera página</span>
                 <IconChevronsLeft />
               </Button>
               <Button
@@ -582,7 +629,7 @@ export function DataTable({
                 onClick={() => table.previousPage()}
                 disabled={!table.getCanPreviousPage()}
               >
-                <span className="sr-only">Go to previous page</span>
+                <span className="sr-only">Ir a la página anterior</span>
                 <IconChevronLeft />
               </Button>
               <Button
@@ -592,7 +639,7 @@ export function DataTable({
                 onClick={() => table.nextPage()}
                 disabled={!table.getCanNextPage()}
               >
-                <span className="sr-only">Go to next page</span>
+                <span className="sr-only">Ir a la siguiente página</span>
                 <IconChevronRight />
               </Button>
               <Button
@@ -602,7 +649,7 @@ export function DataTable({
                 onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                 disabled={!table.getCanNextPage()}
               >
-                <span className="sr-only">Go to last page</span>
+                <span className="sr-only">Ir a la última página</span>
                 <IconChevronsRight />
               </Button>
             </div>
@@ -627,7 +674,7 @@ export function DataTable({
     </Tabs>
   );
 }
-
+//Dashboard del card expandible - Pendiente a cambiar por foto del personal
 const chartData = [
   { month: "January", desktop: 186, mobile: 80 },
   { month: "February", desktop: 305, mobile: 200 },
@@ -636,7 +683,7 @@ const chartData = [
   { month: "May", desktop: 209, mobile: 130 },
   { month: "June", desktop: 214, mobile: 140 },
 ];
-
+//Configuraciones del chart del card Expandible que debo cambiar por una foto
 const chartConfig = {
   desktop: {
     label: "Desktop",
@@ -647,7 +694,7 @@ const chartConfig = {
     color: "var(--primary)",
   },
 } satisfies ChartConfig;
-
+//Datos del form Drawer - Card Expandible
 function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
   const isMobile = useIsMobile();
 
@@ -723,6 +770,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
               <Separator />
             </>
           )}
+          {/*Formulario edicion de personal en el card*/}
           <form className="flex flex-col gap-4">
             <div className="flex flex-col gap-3">
               <Label htmlFor="personal_name">Nombre</Label>
@@ -756,10 +804,10 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                 </Select>
               </div>
               <div className="flex flex-col gap-3">
-                <Label htmlFor="status">Status</Label>
-                <Select defaultValue={item.status}>
-                  <SelectTrigger id="status" className="w-full">
-                    <SelectValue placeholder="Select a status" />
+                <Label htmlFor="especialidad">Especialidad</Label>
+                <Select defaultValue={item.especialidad}>
+                  <SelectTrigger id="especialidad" className="w-full">
+                    <SelectValue placeholder="Select a specialty" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Done">Done</SelectItem>
