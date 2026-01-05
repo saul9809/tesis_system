@@ -41,28 +41,36 @@ import {
   InputGroupText,
   InputGroupTextarea,
 } from "@/components/ui/input-group";
+import { useState } from "react";
 
 //Form Schema
+// --- Zod form schema (cliente) ---
 const formSchema = z.object({
   personal_name: z
     .string()
-    .min(2, "Personal name debe tener minimo 2 characters.")
-    .max(100, "Personal name debe tener 100 caracteres.")
-    .nonempty("Nombre del personal obligatorio."),
-  address: z.string().nonempty("Dirección es obligatoria."),
-  phone: z.string().nonempty("Telefono es obligatorio."),
-  email: z.email("Email no es valido").optional(),
-  province: z.string().min(1, "Seleccione al menos una provincia."),
-  municipalitiy: z.string().min(1, "Seleccione al menos un municipio."),
-  hire_status_id: z.string(),
-  personal_id: z.string(),
-  specialty: z.string(),
-  cv: z.file(),
+    .min(2, "Mínimo 2 caracteres")
+    .max(100, "Máximo 100"),
+  address: z.string().min(1, "Dirección obligatoria"),
+  phone: z.string().min(1, "Teléfono obligatorio"),
+  email: z
+    .email("Email no válido")
+    .optional()
+    .or(z.literal("").transform(() => undefined)),
+  province: z.string().min(1, "Seleccione provincia"),
+  municipalitiy: z.string().min(1, "Seleccione municipio"),
+  hire_status_id: z.string().min(1, "Seleccione estado"),
+  personal_id: z.string().optional(),
+  specialty: z.string().min(1, "Especialidad obligatoria"),
+  cv: z
+    .custom<File>((v) => v instanceof File, { message: "Adjunte CV" })
+    .optional(),
 });
 
-//Funcino para debuguear el formulario
-export function BugReportForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
+//Herramienta para manejar los datos del formulario
+type FormValues = z.infer<typeof formSchema>;
+
+function NewPersonal() {
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       personal_name: "",
@@ -76,10 +84,68 @@ export function BugReportForm() {
       specialty: "",
       cv: undefined,
     },
+    mode: "onChange",
   });
-}
+  //Hooks para datos dinamicos
+  const [provinces, setProvinces] = useState<{ id: string; name: string }[]>(
+    []
+  );
+  const [municipalitiys, setMunicipalitiys] = useState<
+    { id: string; name: string }[]
+  >([]);
+  const [hireStatuses, setHireStatuses] = useState<
+    { id: string; label: string }[]
+  >([]);
+  const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-function NewPersonal() {
+  // cargar los datos dinamicos
+  React.useEffect(() => {
+    (async () => {
+      try {
+        //Trayendo los datos desde la api
+        const [provincesRes, hireStatusRes] = await Promise.all([
+          fetch("/api/provinces"),
+          fetch("/api/hire-statuses"),
+        ]);
+        //Guardando los datos en el estado en formato json
+        const [provincesData, hireStatusData] = await Promise.all([
+          provincesRes.json(),
+          hireStatusRes.json(),
+        ]);
+        setProvinces(provincesData);
+        setHireStatuses(hireStatusData);
+      } catch (error) {
+        toast.error(
+          "No se pudieron cargar las provincias o estados de contratación."
+        );
+      }
+    })();
+  }, []);
+
+  //Cargar municipios cuando cambie la provincia
+  const provinceValue = form.watch("province");
+  React.useEffect(() => {
+    form.setValue("municipalitiy", ""); //Resetear municipio al cambiar de provincia
+    if (!provinceValue) {
+      setMunicipalitiys([]);
+      return;
+    }
+    (async () => {
+      try {
+        const res = await fetch(
+          `/api/municipalities?province=${provinceValue}`
+        );
+        const data = await res.json();
+        setMunicipalitiys(data);
+      } catch (error) {
+        toast.error("No se pudieron cargar los municipios.");
+      }
+    })();
+  }, [provinceValue]);
+
+  //Configurando el submit del formulario
+
   return (
     <>
       <Dialog>
